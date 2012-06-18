@@ -1,11 +1,17 @@
 {
   "name": "node",
   "version": "1.0.0",
+  "private": true,
   "dependencies": {
-    "express": ">= 2.5.1",
-    "coffee-script": "*",
-    "stylus": "*",
-    "nib": "*",
-    "jade": "*"
+    "express": ">= 2.5.8",
+    "coffee-script": "latest",
+    "stylus": "latest",
+    "nib": "latest",
+    "jade": "latest",
+    "konphyg": "latest"
+  },
+  "engines": {
+    "node": "0.6.x",
+    "npm":  "1.1.x"
   }
 }

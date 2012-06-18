@@ -1,35 +1,26 @@
 # Require Node Packages
-
 express = require 'express'
-stylus  = require 'stylus'
-nib     = require 'nib'
+config  = require('konphyg')('#{__dirname}/config')
+app_setup = require './lib/setup'
 
-# Configure Express App
-
+##/*-------------------------------------------------------------*/
+#/* ----- Make express server -------	*/
 app = module.exports = express.createServer()
 
-app.configure ->
-  app.set 'port', process.env.PORT || 3000
-  app.set 'views', __dirname + '/views'
-  app.set 'view engine', 'jade'
-  app.use express.bodyParser()
-  app.use express.methodOverride()
-  app.use app.router
-  app.use stylus.middleware
-    src: __dirname + '/public'
-    compile: (str, path) ->
-      stylus(str).set('filename', path).set('compress', true).use(nib())
-  app.use express.static __dirname + '/public'
+
+#/* ----- Express setup -------	*/
+app_setup app, __dirname, ->
   
-app.configure 'development', () ->
-  app.use express.errorHandler dumpExceptions: true, showStack: true
-  
-app.configure 'production', () ->
-  app.use express.errorHandler()
-  
-# Declare Express Routing & Listen
-  
+##/*-------------------------------------------------------------*/
+
+
+
+#/* ----- Routes -------	*/
 app.get '/', (req, res) ->
   res.render 'index'
-  
+
+
+
+
+#/* ----- Listen to port -------	*/
 app.listen app.settings.port
